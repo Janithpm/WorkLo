@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "731944079598",
+    "project_id": "worklo-4664a",
+    "storage_bucket": "worklo-4664a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731944079598:android:c26141040cfd58062b23ff",
+        "android_client_info": {
+          "package_name": "com.example.worklo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUYdZsWgetmYESO8MuqTy_PMa7k24slqY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
