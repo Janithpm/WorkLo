@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:worklo/pages/addtodo.dart';
 import 'package:worklo/pages/signin.dart';
 
 import '../service/auth.dart';
@@ -40,7 +41,7 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: Text("Home Page"),
+      body: AddTodoPage(),
     );
   }
 }
