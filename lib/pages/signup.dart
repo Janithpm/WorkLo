@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:worklo/pages/signin.dart';
 
+import '../service/auth.dart';
 import 'home.dart';
 
 class SignupPage extends StatefulWidget {
@@ -16,6 +17,8 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isLoading = false;
+
+  Auth googleAuth = Auth();
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +147,9 @@ class _SignupPageState extends State<SignupPage> {
 
   Widget SocialBtn(String text) {
     return InkWell(
-      onTap: () async {},
+      onTap: () async {
+        await googleAuth.signInWithGoogle(context);
+      },
       child: Container(
         height: 60,
         width: MediaQuery.of(context).size.width - 60,
