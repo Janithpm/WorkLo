@@ -1,3 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -26,11 +29,11 @@ class _MyAppState extends State<MyApp> {
   // Widget CurrentPage = SigninPage();
   // Auth auth = Auth();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   checkLogin();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    check();
+  }
 
   // void checkLogin() async {
   //   String token = await auth.getToken("token");
@@ -44,6 +47,27 @@ class _MyAppState extends State<MyApp> {
   //     });
   //   }
   // }
+
+  Auth googleAuth = Auth();
+
+  void check() async {
+    try {
+      User? currentUser = await googleAuth.checkWhetherLogedIn();
+      if (currentUser != null) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (builder) => const HomePage()),
+            (route) => false);
+      } else {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (builder) => const SigninPage()),
+            (route) => false);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -71,4 +71,13 @@ class Auth {
   // Future<String> getToken(String key) async {
   //   return await storage.read(key: key).toString();
   // }
+
+  Future<User?> checkWhetherLogedIn() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      return user;
+    } else {
+      return null;
+    }
+  }
 }
