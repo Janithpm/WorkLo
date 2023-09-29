@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:worklo/constants/colors.dart';
 import 'package:worklo/pages/signin.dart';
 import 'package:worklo/pages/signup.dart';
 
@@ -60,8 +61,7 @@ class WelocmePage extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                       style: OutlinedButton.styleFrom(
-                        side: const BorderSide(
-                            width: 1, color: const Color(0xFF3b5998)),
+                        side: const BorderSide(width: 1, color: primaryColor),
                         padding: const EdgeInsets.symmetric(vertical: 15),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -78,14 +78,13 @@ class WelocmePage extends StatelessWidget {
                           const Text("Sign In", style: TextStyle(fontSize: 18)),
                     ),
                   ),
-                  const SizedBox(width: 20),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: OutlinedButton(
                       style: OutlinedButton.styleFrom(
                         // use theme color for btn border and text color
 
-                        side: const BorderSide(
-                            width: 1, color: const Color(0xF4110DE3)),
+                        side: const BorderSide(width: 1, color: primaryColor),
                         padding: const EdgeInsets.symmetric(vertical: 15),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),

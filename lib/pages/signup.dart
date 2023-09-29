@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:worklo/constants/colors.dart';
 import 'package:worklo/pages/signin.dart';
 
 import '../service/auth.dart';
@@ -35,14 +36,12 @@ class _SignupPageState extends State<SignupPage> {
           const Text(
             "SIGN UP WITH",
             style: TextStyle(
-                color: Colors.black87,
-                fontSize: 25,
-                fontWeight: FontWeight.w300),
+                color: primaryColor, fontSize: 25, fontWeight: FontWeight.w300),
           ),
           const Text(
             "WORKLO",
             style: TextStyle(
-                color: Colors.black, fontSize: 50, fontWeight: FontWeight.w400),
+                color: primaryColor, fontSize: 50, fontWeight: FontWeight.w400),
           ),
           const SizedBox(
             height: 30,
@@ -115,7 +114,7 @@ class _SignupPageState extends State<SignupPage> {
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                   gradient: LinearGradient(
-                      colors: [Colors.blue, Colors.blueAccent],
+                      colors: [primaryColor, primaryColor],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       stops: [0.0, 1.0])),
@@ -152,7 +151,7 @@ class _SignupPageState extends State<SignupPage> {
                 child: const Text(" Sign In",
                     style: TextStyle(
                         fontSize: 16,
-                        color: Color(0xFF309FFA),
+                        color: primaryColor,
                         fontWeight: FontWeight.bold)),
               ),
             ],
@@ -211,7 +210,7 @@ class _SignupPageState extends State<SignupPage> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: new Color(0xff1A73E9)),
+              borderSide: BorderSide(color: primaryColor),
             ),
           ),
           style: TextStyle(color: Colors.black),

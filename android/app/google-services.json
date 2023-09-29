@@ -12,7 +12,20 @@
           "package_name": "com.example.worklo"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "731944079598-94046sudavq1evqg9pi7v7p81sh5i699.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.worklo",
+            "certificate_hash": "a0420eb769787bea6f69177622d3bdb4301da900"
+          }
+        },
+        {
+          "client_id": "731944079598-1ru47oedce0m73tq3uv2qdbs0i03ev6c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDUYdZsWgetmYESO8MuqTy_PMa7k24slqY"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "731944079598-1ru47oedce0m73tq3uv2qdbs0i03ev6c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "731944079598-cfh9ifsl6g0v8cpnt6gufo4mv32s8oc7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.worklo"
+              }
+            }
+          ]
         }
       }
     }
