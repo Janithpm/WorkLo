@@ -14,6 +14,7 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   firebase_auth.FirebaseAuth auth = firebase_auth.FirebaseAuth.instance;
+  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isLoading = false;
@@ -27,14 +28,21 @@ class _SignupPageState extends State<SignupPage> {
             child: Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      color: Colors.black,
+      color: Colors.white,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
-            "Sign Up",
+            "SIGN UP WITH",
             style: TextStyle(
-                color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold),
+                color: Colors.black87,
+                fontSize: 25,
+                fontWeight: FontWeight.w300),
+          ),
+          const Text(
+            "WORKLO",
+            style: TextStyle(
+                color: Colors.black, fontSize: 50, fontWeight: FontWeight.w400),
           ),
           const SizedBox(
             height: 30,
@@ -45,11 +53,16 @@ class _SignupPageState extends State<SignupPage> {
           // ),
           // SocialBtn("Continue with Mobile"),
           const SizedBox(
-            height: 30,
+            height: 40,
           ),
-          const Text("or", style: TextStyle(color: Colors.white, fontSize: 20)),
+          const Text("Or sign up using Email and Password",
+              style: TextStyle(color: Colors.black54, fontSize: 16)),
           const SizedBox(
-            height: 30,
+            height: 20,
+          ),
+          TextInput("Full Name", nameController),
+          const SizedBox(
+            height: 15,
           ),
           TextInput("Email Address", emailController),
           const SizedBox(
@@ -69,6 +82,9 @@ class _SignupPageState extends State<SignupPage> {
                     await auth.createUserWithEmailAndPassword(
                         email: emailController.text,
                         password: passwordController.text);
+                //add name to firebase
+                await user.user!.updateDisplayName(nameController.text);
+                print(user.user!.displayName);
                 if (user.user!.email != null) {
                   // ignore: use_build_context_synchronously
                   Navigator.pushAndRemoveUntil(
@@ -124,7 +140,7 @@ class _SignupPageState extends State<SignupPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text("Already have an account?",
-                  style: TextStyle(color: Colors.white, fontSize: 16)),
+                  style: TextStyle(color: Colors.black87, fontSize: 16)),
               InkWell(
                 onTap: () {
                   Navigator.pushAndRemoveUntil(
@@ -135,7 +151,8 @@ class _SignupPageState extends State<SignupPage> {
                 },
                 child: const Text(" Sign In",
                     style: TextStyle(
-                        color: Color.fromARGB(255, 48, 159, 250),
+                        fontSize: 16,
+                        color: Color(0xFF309FFA),
                         fontWeight: FontWeight.bold)),
               ),
             ],
@@ -183,21 +200,21 @@ class _SignupPageState extends State<SignupPage> {
           controller: controller,
           decoration: InputDecoration(
             hintText: text,
-            hintStyle: TextStyle(color: Colors.white),
+            hintStyle: TextStyle(color: Colors.black54),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.black),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.black),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: new Color(0xff1A73E9)),
             ),
           ),
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.black),
         ));
   }
 }

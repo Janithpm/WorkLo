@@ -7,6 +7,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:worklo/pages/home.dart';
 import 'package:worklo/pages/signup.dart';
 import 'package:worklo/pages/signin.dart';
+import 'package:worklo/pages/splashscreen.dart';
+import 'package:worklo/pages/welcome.dart';
+import 'package:worklo/utils/theme/workLotheme.dart';
 import 'firebase_options.dart';
 import 'service/auth.dart';
 
@@ -71,6 +74,13 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: SigninPage());
+    return MaterialApp(
+      theme: WorkLoTheme.lightTheme,
+      darkTheme: WorkLoTheme.lightTheme,
+      themeMode: ThemeMode.light,
+      debugShowCheckedModeBanner: false,
+      title: 'Worklo',
+      home: WelocmePage(),
+    );
   }
 }

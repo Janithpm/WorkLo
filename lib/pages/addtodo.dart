@@ -15,7 +15,7 @@ class _AddTodoPageState extends State<AddTodoPage> {
       //   title: const Text("Add Todo"),
       // ),
       body: Container(
-        color: Colors.black87,
+        // color:s Colors.black87,
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [

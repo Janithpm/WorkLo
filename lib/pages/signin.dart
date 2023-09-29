@@ -25,14 +25,22 @@ class _SigninPageState extends State<SigninPage> {
             child: Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      color: Colors.black87,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
-            "Sign In",
+            "SIGN IN WITH",
             style: TextStyle(
-                color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold),
+                color: Colors.black87,
+                fontSize: 25,
+                fontWeight: FontWeight.w300),
+          ),
+          const Text(
+            "WORKLO",
+            style: TextStyle(
+                color: Colors.black87,
+                fontSize: 50,
+                fontWeight: FontWeight.w400),
           ),
           const SizedBox(
             height: 30,
@@ -43,11 +51,12 @@ class _SigninPageState extends State<SigninPage> {
           // ),
           // SocialBtn("Continue with Mobile"),
           const SizedBox(
-            height: 30,
+            height: 40,
           ),
-          const Text("or", style: TextStyle(color: Colors.white, fontSize: 20)),
+          const Text("Or sign in using Email and Password",
+              style: TextStyle(color: Colors.black54, fontSize: 16)),
           const SizedBox(
-            height: 30,
+            height: 20,
           ),
           TextInput("Email Address", emailController),
           const SizedBox(
@@ -62,7 +71,7 @@ class _SigninPageState extends State<SigninPage> {
             children: const [
               Text(
                 "Forgot Password?",
-                style: TextStyle(color: Colors.white, fontSize: 16),
+                style: TextStyle(color: Colors.black87, fontSize: 16),
               ),
               SizedBox(
                 width: 30,
@@ -70,7 +79,7 @@ class _SigninPageState extends State<SigninPage> {
             ],
           ),
           const SizedBox(
-            height: 30,
+            height: 25,
           ),
           Container(
             height: 60,
@@ -119,7 +128,7 @@ class _SigninPageState extends State<SigninPage> {
               child: isLoading
                   ? const CircularProgressIndicator()
                   : const Text(
-                      "Sign In",
+                      "SIGN IN",
                       style: TextStyle(
                         color: Color.fromARGB(255, 255, 255, 255),
                         fontSize: 18,
@@ -135,7 +144,7 @@ class _SigninPageState extends State<SigninPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text("Don't have an account?",
-                  style: TextStyle(color: Colors.white, fontSize: 16)),
+                  style: TextStyle(color: Colors.black87, fontSize: 16)),
               InkWell(
                 onTap: () {
                   Navigator.pushAndRemoveUntil(
@@ -144,9 +153,10 @@ class _SigninPageState extends State<SigninPage> {
                           builder: (builder) => const SignupPage()),
                       (route) => false);
                 },
-                child: const Text(" Sign In",
+                child: const Text(" Sign Up",
                     style: TextStyle(
-                        color: Color.fromARGB(255, 48, 159, 250),
+                        fontSize: 16,
+                        color: Color(0xFF309FFA),
                         fontWeight: FontWeight.bold)),
               ),
             ],
@@ -194,21 +204,21 @@ class _SigninPageState extends State<SigninPage> {
           controller: controller,
           decoration: InputDecoration(
             hintText: text,
-            hintStyle: TextStyle(color: Colors.white),
+            hintStyle: TextStyle(color: Colors.black54),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.black),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.black),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: new Color(0xff1A73E9)),
             ),
           ),
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.black),
         ));
   }
 }
