@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:worklo/constants/colors.dart';
 import 'package:worklo/pages/signin.dart';
 import 'package:worklo/pages/signup.dart';
@@ -14,97 +15,75 @@ class WelocmePage extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Image.asset('assets/splash.png'),
-              const SizedBox(height: 20),
-              // const Text(
-              //   'Welcome to',
-              //   style: TextStyle(
-              //     color: Colors.black87,
-              //     fontSize: 25,
-              //     fontWeight: FontWeight.w300,
-              //   ),
-              // ),
-
-              const SizedBox(height: 20),
+              SvgPicture.asset("assets/b3.svg", height: 450, width: 450),
               const Text(
-                'Your Tasks, Your Rules',
+                'WORKLO',
                 style: TextStyle(
                   color: Colors.black87,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-              const Text(
-                'Welcome Aboard!',
-                style: TextStyle(
-                  color: Colors.black87,
-                  fontSize: 30,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-              const SizedBox(height: 10),
-
-              const Text(
-                'WorkLo',
-                style: TextStyle(
-                  color: Colors.black,
                   fontSize: 80,
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              const SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      style: OutlinedButton.styleFrom(
-                        side: const BorderSide(width: 1, color: primaryColor),
-                        padding: const EdgeInsets.symmetric(vertical: 15),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (builder) => const SigninPage()),
-                            (route) => false);
-                      },
-                      child:
-                          const Text("Sign In", style: TextStyle(fontSize: 18)),
+              const Text(
+                'Your Tasks, Your Rules, Welcome Aboard!',
+                style: TextStyle(
+                  color: Colors.black87,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+
+              const SizedBox(height: 40),
+
+              //sign in
+              Container(
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: ElevatedButton(
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(width: 1, color: primaryColor),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        // use theme color for btn border and text color
-
-                        side: const BorderSide(width: 1, color: primaryColor),
-                        padding: const EdgeInsets.symmetric(vertical: 15),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (builder) => const SignupPage()),
-                            (route) => false);
-                      },
-                      child: const Text(
-                        "Sign Up",
-                        style: TextStyle(fontSize: 18),
-                      ),
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (builder) => const SigninPage()),
+                        (route) => false);
+                  },
+                  child: const Text("Sign In", style: TextStyle(fontSize: 18)),
+                ),
+              ),
+              const SizedBox(height: 20),
+              //sign up
+              Container(
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(width: 1, color: primaryColor),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                  )
-                ],
-              )
+                  ),
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (builder) => const SignupPage()),
+                        (route) => false);
+                  },
+                  child: const Text(
+                    "Sign Up",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 40),
             ],
           ),
         ),

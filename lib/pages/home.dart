@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:worklo/constants/colors.dart';
 import 'package:worklo/pages/signin.dart';
+import 'package:worklo/pages/welcome.dart';
 import 'package:worklo/widgets/todolist.dart';
 
 import '../service/auth.dart';
@@ -132,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                          builder: (builder) => const SigninPage()),
+                          builder: (builder) => const WelocmePage()),
                       (route) => false);
                 } catch (e) {
                   print(e);
@@ -312,8 +313,13 @@ class _HomePageState extends State<HomePage> {
                       onPressed: () {
                         saveTodo();
                         Navigator.of(context).pop();
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (builder) => const HomePage()),
+                            (route) => false);
                       },
-                      child: const Text("Add"),
+                      child: const Text("Add", style: TextStyle(fontSize: 18)),
                     ),
                   )
                 ],
@@ -340,150 +346,6 @@ class _HomePageState extends State<HomePage> {
       labelPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
     );
   }
-
-  Future openDialog() => showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-            title: const Text("Add Task"),
-            content: Container(
-              height: 300,
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                children: [
-                  const SizedBox(height: 10),
-                  //task name
-                  textInput("Task Name", _titleController),
-
-                  //priority and category
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Priority",
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.black54),
-                            ),
-                            DropdownButton(
-                              value: _selectedPriority,
-                              icon: const Icon(Icons.arrow_downward),
-                              iconSize: 24,
-                              elevation: 16,
-                              underline: Container(
-                                height: 2,
-                                color: Colors.black54,
-                              ),
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  _selectedPriority = newValue!;
-                                });
-                              },
-                              items: _priorities
-                                  .map(
-                                    (e) => DropdownMenuItem(
-                                      value: e,
-                                      child: Text(e),
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Category",
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.black54),
-                            ),
-                            DropdownButton(
-                              value: _selectedCategory,
-                              icon: const Icon(Icons.arrow_downward),
-                              iconSize: 24,
-                              elevation: 16,
-                              underline: Container(
-                                height: 2,
-                                width: 200,
-                                color: Colors.black54,
-                              ),
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  _selectedCategory = newValue!;
-                                });
-                              },
-                              items: _categories
-                                  .map(
-                                    (e) => DropdownMenuItem(
-                                      value: e,
-                                      child: Text(e),
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-
-                  //date
-                  const SizedBox(height: 10),
-                  datePicker(_dateController),
-
-                  //time
-                  const SizedBox(height: 10),
-                  timePicker(_timeController),
-
-                  //description
-                  // const SizedBox(height: 30),
-                  // TextFormField(
-                  //   minLines: 2,
-                  //   maxLines: null,
-                  //   // keyboardType: TextInputType.multiline,
-                  //   controller: _descriptionController,
-                  //   decoration: InputDecoration(
-                  //     hintText: "Description",
-                  //     hintStyle: TextStyle(color: Colors.black54),
-                  //     border: OutlineInputBorder(
-                  //       borderRadius: BorderRadius.circular(10),
-                  //       borderSide: BorderSide(color: Colors.black),
-                  //     ),
-                  //     enabledBorder: OutlineInputBorder(
-                  //       borderRadius: BorderRadius.circular(10),
-                  //       borderSide: BorderSide(color: Colors.black),
-                  //     ),
-                  //     focusedBorder: OutlineInputBorder(
-                  //       borderRadius: BorderRadius.circular(10),
-                  //       borderSide: BorderSide(color: primaryColor),
-                  //     ),
-                  //   ),
-                  //   style: TextStyle(color: Colors.black),
-                  // ),
-                ],
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text("Cancel"),
-              ),
-              TextButton(
-                onPressed: () {
-                  saveTodo();
-                  Navigator.of(context).pop();
-                },
-                child: const Text("Add"),
-              ),
-            ],
-          ));
 
   Widget textInput(String text, TextEditingController controller) {
     return Column(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:worklo/constants/colors.dart';
 import 'package:worklo/pages/home.dart';
 import 'package:worklo/pages/signup.dart';
@@ -27,33 +28,35 @@ class _SigninPageState extends State<SigninPage> {
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const Text(
-            "SIGN IN WITH",
-            style: TextStyle(
-                color: primaryColor, fontSize: 25, fontWeight: FontWeight.w300),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 40),
+            child: const Text(
+              "Time to Get Things Done with WorkLo! Sign in to Your Account.",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: primaryColor,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w300),
+            ),
           ),
-          const Text(
-            "WORKLO",
-            style: TextStyle(
-                color: primaryColor, fontSize: 50, fontWeight: FontWeight.w400),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          SocialBtn("Continue with Google"),
-          // const SizedBox(
-          //   height: 10,
+          // const Text(
+          //   "WORKLO",
+          //   style: TextStyle(
+          //       color: primaryColor, fontSize: 50, fontWeight: FontWeight.w400),
           // ),
-          // SocialBtn("Continue with Mobile"),
           const SizedBox(
             height: 40,
+          ),
+          SocialBtn("Continue With Google"),
+          const SizedBox(
+            height: 50,
           ),
           const Text("Or sign in using Email and Password",
               style: TextStyle(color: Colors.black54, fontSize: 16)),
           const SizedBox(
-            height: 20,
+            height: 30,
           ),
           TextInput("Email Address", emailController),
           const SizedBox(
@@ -76,66 +79,66 @@ class _SigninPageState extends State<SigninPage> {
             ],
           ),
           const SizedBox(
-            height: 25,
+            height: 40,
           ),
-          Container(
-            height: 60,
-            width: MediaQuery.of(context).size.width - 60,
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                gradient: LinearGradient(
-                    colors: [primaryColor, primaryColor],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    stops: [0.0, 1.0])),
-            child: Center(
-                child: InkWell(
-              onTap: () async {
-                setState(() {
-                  isLoading = true;
-                });
-                try {
-                  firebase_auth.UserCredential user =
-                      await auth.signInWithEmailAndPassword(
-                          email: emailController.text,
-                          password: passwordController.text);
-                  print(user.user);
-                  if (user.user != null) {
-                    // ignore: use_build_context_synchronously
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (builder) => const HomePage()),
-                        (route) => false);
-                  } else {
-                    const snakbar =
-                        SnackBar(content: Text("Email or password incorrect!"));
-                    // ignore: use_build_context_synchronously
-                    ScaffoldMessenger.of(context).showSnackBar(snakbar);
-                  }
-                } catch (e) {
-                  print(e);
-                  final snakbar = SnackBar(content: Text(e.toString()));
+          InkWell(
+            onTap: () async {
+              setState(() {
+                isLoading = true;
+              });
+              try {
+                firebase_auth.UserCredential user =
+                    await auth.signInWithEmailAndPassword(
+                        email: emailController.text,
+                        password: passwordController.text);
+                print(user.user);
+                if (user.user != null) {
+                  // ignore: use_build_context_synchronously
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (builder) => const HomePage()),
+                      (route) => false);
+                } else {
+                  const snakbar =
+                      SnackBar(content: Text("Email or password incorrect!"));
+                  // ignore: use_build_context_synchronously
                   ScaffoldMessenger.of(context).showSnackBar(snakbar);
-                  setState(() {
-                    isLoading = false;
-                  });
                 }
-              },
-              child: isLoading
-                  ? const CircularProgressIndicator()
-                  : const Text(
-                      "SIGN IN",
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+              } catch (e) {
+                print(e);
+                final snakbar = SnackBar(content: Text(e.toString()));
+                ScaffoldMessenger.of(context).showSnackBar(snakbar);
+                setState(() {
+                  isLoading = false;
+                });
+              }
+            },
+            child: Container(
+              height: 60,
+              width: MediaQuery.of(context).size.width - 60,
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  gradient: LinearGradient(
+                      colors: [primaryColor, primaryColor],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      stops: [0.0, 1.0])),
+              child: Center(
+                child: isLoading
+                    ? const CircularProgressIndicator()
+                    : const Text(
+                        "SIGN IN",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-            )),
+              ),
+            ),
           ),
           const SizedBox(
-            height: 20,
+            height: 60,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -157,7 +160,10 @@ class _SigninPageState extends State<SigninPage> {
                         fontWeight: FontWeight.bold)),
               ),
             ],
-          )
+          ),
+          const SizedBox(
+            height: 50,
+          ),
         ],
       ),
     )));
@@ -169,22 +175,27 @@ class _SigninPageState extends State<SigninPage> {
         await googleAuth.signInWithGoogle(context);
       },
       child: Container(
-        height: 60,
+        height: 80,
         width: MediaQuery.of(context).size.width - 60,
         child: Card(
-          color: Colors.black87,
+          // color: Colors.black87,
+          elevation: 2,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-              side: const BorderSide(color: Colors.white)),
+              borderRadius: BorderRadius.circular(20),
+              side: const BorderSide(width: 1, color: Colors.grey)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SvgPicture.asset('assets/google.svg', height: 40, width: 40),
+              SizedBox(
+                width: 20,
+              ),
               Text(
                 text,
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+                    color: Colors.black87,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500),
               ),
             ],
           ),

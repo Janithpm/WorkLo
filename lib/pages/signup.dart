@@ -31,45 +31,45 @@ class _SignupPageState extends State<SignupPage> {
       width: MediaQuery.of(context).size.width,
       color: Colors.white,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const Text(
-            "SIGN UP WITH",
-            style: TextStyle(
-                color: primaryColor, fontSize: 25, fontWeight: FontWeight.w300),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 40),
+            child: const Text(
+              "New Here? Sign Up for WorkLo Task Management Bliss!",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: primaryColor,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w300),
+            ),
           ),
-          const Text(
-            "WORKLO",
-            style: TextStyle(
-                color: primaryColor, fontSize: 50, fontWeight: FontWeight.w400),
+
+          // const Text(
+          //   "New Here? Sign Up for WorkLo Task Management Bliss!",
+          //   textAlign: TextAlign.center,
+          //   style: TextStyle(
+          //       color: primaryColor, fontSize: 35, fontWeight: FontWeight.w300),
+          // ),
+          const SizedBox(
+            height: 50,
           ),
+          const Text("Sign up using Email and Password",
+              style: TextStyle(color: Colors.black54, fontSize: 18)),
           const SizedBox(
             height: 30,
-          ),
-          SocialBtn("Continue with Google"),
-          // const SizedBox(
-          //   height: 10,
-          // ),
-          // SocialBtn("Continue with Mobile"),
-          const SizedBox(
-            height: 40,
-          ),
-          const Text("Or sign up using Email and Password",
-              style: TextStyle(color: Colors.black54, fontSize: 16)),
-          const SizedBox(
-            height: 20,
           ),
           TextInput("Full Name", nameController),
           const SizedBox(
-            height: 15,
+            height: 25,
           ),
           TextInput("Email Address", emailController),
           const SizedBox(
-            height: 15,
+            height: 25,
           ),
           TextInput("Password", passwordController),
           const SizedBox(
-            height: 30,
+            height: 40,
           ),
           InkWell(
             onTap: () async {
@@ -122,7 +122,7 @@ class _SignupPageState extends State<SignupPage> {
                 child: isLoading
                     ? const CircularProgressIndicator()
                     : const Text(
-                        "Sign Up",
+                        "SIGN UP",
                         style: TextStyle(
                           color: Color.fromARGB(255, 255, 255, 255),
                           fontSize: 18,
@@ -133,7 +133,7 @@ class _SignupPageState extends State<SignupPage> {
             ),
           ),
           const SizedBox(
-            height: 20,
+            height: 60,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -155,7 +155,10 @@ class _SignupPageState extends State<SignupPage> {
                         fontWeight: FontWeight.bold)),
               ),
             ],
-          )
+          ),
+          const SizedBox(
+            height: 50,
+          ),
         ],
       ),
     )));
