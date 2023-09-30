@@ -67,13 +67,45 @@ class _CompletedTodoState extends State<CompletedTodo> {
         QuerySnapshot querySnapshot = snapshot.data as QuerySnapshot;
 
         if (querySnapshot.docs.isEmpty) {
-          return const SizedBox(
+          return Container(
             height: 300,
-            child: Center(
-              child: Text(
-                "No Data Found",
-                style: TextStyle(fontSize: 20, color: Colors.black54),
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const [
+                Text(
+                  "No Completed Tasks",
+                  style: TextStyle(fontSize: 23, color: Colors.black54),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Icon(
+                  Icons.rule_folder_outlined,
+                  size: 70,
+                  color: Colors.black45,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Add new tasks by",
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black45,
+                      fontWeight: FontWeight.w400),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  "pressing + button.",
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black45,
+                      fontWeight: FontWeight.w400),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
           );
         }
@@ -84,44 +116,17 @@ class _CompletedTodoState extends State<CompletedTodo> {
           alignment: Alignment.topLeft,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  // date,
-                  "Done !",
-                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.w500),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text("Your Completed Task List",
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black54)),
-                const SizedBox(
-                  height: 30,
-                ),
-                Flexible(
-                  child: ListView(
-                    children: querySnapshot.docs.map((doc) {
-                      return TodoCard(
-                        doc.id,
-                        doc['title'],
-                        doc['date'],
-                        doc['time'],
-                        doc['priority'],
-                        doc['category'],
-                      );
-                    }).toList(),
-                  ),
-                )
-              ],
+            child: ListView(
+              children: querySnapshot.docs.map((doc) {
+                return TodoCard(
+                  doc.id,
+                  doc['title'],
+                  doc['date'],
+                  doc['time'],
+                  doc['priority'],
+                  doc['category'],
+                );
+              }).toList(),
             ),
           ),
         );

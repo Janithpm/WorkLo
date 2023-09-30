@@ -20,8 +20,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentTab = 0;
-
   Auth googleAuth = Auth();
 
   TextEditingController _titleController = TextEditingController();
@@ -117,11 +115,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
         appBar: AppBar(
           shadowColor: primaryColor,
           backgroundColor: primaryColor,
-          title: Text("WorkLo"),
+          title: const Text("WorkLo"),
           actions: [
             IconButton(
               onPressed: () async {
@@ -142,53 +142,32 @@ class _HomePageState extends State<HomePage> {
               icon: const Icon(Icons.logout),
             )
           ],
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: 0,
-          onTap: (index) {
-            setState(() {
-              if (index == 1) {
-                openDialog();
-                if (_currentTab == 2) _currentTab = 0;
-              } else {
-                _currentTab = index;
-              }
-            });
-          },
-          items: [
-            const BottomNavigationBarItem(
-              icon: Icon(
-                Icons.folder_special,
-                size: 30,
+
+          //tabbar
+          bottom: const TabBar(
+            tabs: [
+              Tab(
+                icon: Icon(Icons.folder_special),
+                text: "My Tasks",
               ),
-              label: "Tasks",
-              backgroundColor: primaryColor,
-            ),
-            BottomNavigationBarItem(
-                icon: Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                      color: primaryColor,
-                      borderRadius: BorderRadius.circular(100)),
-                  child: const Icon(
-                    Icons.add,
-                    size: 30,
-                    color: Colors.white,
-                  ),
-                ),
-                label: "",
-                backgroundColor: primaryColor),
-            const BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.rule_folder,
-                  size: 30,
-                ),
-                label: "Completed",
-                backgroundColor: primaryColor),
-          ],
+              Tab(
+                icon: Icon(Icons.rule_folder),
+                text: "Completed Tasks",
+              ),
+            ],
+          ),
         ),
-        body: _currentTab == 0 ? TodoList() : CompletedTodo());
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            openDialog();
+          },
+          child: Icon(Icons.add),
+        ),
+        body: TabBarView(
+          children: [TodoList(), CompletedTodo()],
+        ),
+      ),
+    );
   }
 
   Widget ChipData(String label) {
