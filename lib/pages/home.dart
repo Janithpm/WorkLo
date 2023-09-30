@@ -21,6 +21,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String? _selectedCategory = "Other";
+  String? _selectedPriority = "High";
+
   Auth googleAuth = Auth();
 
   TextEditingController _titleController = TextEditingController();
@@ -45,17 +48,14 @@ class _HomePageState extends State<HomePage> {
     "Low",
   ];
 
-  String _selectedCategory = "Work";
-  String _selectedPriority = "Medium";
-
   Priority _priority = Priority.high;
 
   Future<void> saveTodo() async {
     String title = _titleController.text;
     String date = _dateController.text;
     String time = _timeController.text;
-    String category = _selectedCategory;
-    String priority = _selectedPriority;
+    String category = _selectedCategory ?? "Other";
+    String priority = _selectedPriority ?? "High";
 
     User? user = FirebaseAuth.instance.currentUser;
 
@@ -75,8 +75,8 @@ class _HomePageState extends State<HomePage> {
       _titleController.clear();
       _dateController.clear();
       _timeController.clear();
-      _selectedCategory = "Work";
-      _selectedPriority = "Medium";
+      _selectedCategory = "Other";
+      _selectedPriority = "High";
 
       const snakbar = SnackBar(content: Text("Task added successfully."));
       // ignore: use_build_context_synchronously
@@ -228,7 +228,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               onChanged: (String? newValue) {
                                 setState(() {
-                                  _selectedPriority = newValue!;
+                                  _selectedPriority = newValue;
                                 });
                               },
                               items: _priorities
@@ -268,7 +268,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               onChanged: (String? newValue) {
                                 setState(() {
-                                  _selectedCategory = newValue!;
+                                  _selectedCategory = newValue;
                                 });
                               },
                               items: _categories
@@ -326,8 +326,8 @@ class _HomePageState extends State<HomePage> {
     _titleController.clear();
     _dateController.clear();
     _timeController.clear();
-    _selectedCategory = "Work";
-    _selectedPriority = "Medium";
+    _selectedCategory = "Other";
+    _selectedPriority = "High";
   }
 
   Widget ChipData(String label) {
