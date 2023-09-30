@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
@@ -159,7 +160,8 @@ class _HomePageState extends State<HomePage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            openDialog();
+            // openDialog();
+            openModal();
           },
           child: Icon(Icons.add),
         ),
@@ -168,6 +170,164 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  Future openModal() async {
+    await showModalBottomSheet(
+        context: context,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        builder: (BuildContext builder) {
+          return Container(
+            height: 500,
+            color: CupertinoColors.white,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Add New Task",
+                    style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
+                        color: primaryColor),
+                  ),
+                  const SizedBox(height: 20),
+                  //title
+                  textInput("Task Name", _titleController),
+
+                  const SizedBox(height: 5),
+                  //priority and category
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Priority",
+                              style: TextStyle(
+                                  fontSize: 16, color: Colors.black54),
+                            ),
+                            DropdownButton(
+                              value: _selectedPriority,
+                              icon: const Icon(Icons.arrow_downward),
+                              iconSize: 24,
+                              elevation: 16,
+                              isExpanded: true,
+                              underline: Container(
+                                height: 1,
+                                color: Colors.black45,
+                              ),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _selectedPriority = newValue!;
+                                });
+                              },
+                              items: _priorities
+                                  .map(
+                                    (e) => DropdownMenuItem(
+                                      value: e,
+                                      child: Text(e),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Category",
+                              style: TextStyle(
+                                  fontSize: 16, color: Colors.black54),
+                            ),
+                            DropdownButton(
+                              value: _selectedCategory,
+                              icon: const Icon(Icons.arrow_downward),
+                              iconSize: 24,
+                              elevation: 16,
+                              isExpanded: true,
+                              underline: Container(
+                                height: 1,
+                                width: 200,
+                                color: Colors.black45,
+                              ),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _selectedCategory = newValue!;
+                                });
+                              },
+                              items: _categories
+                                  .map(
+                                    (e) => DropdownMenuItem(
+                                      value: e,
+                                      child: Text(e),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+
+                  const SizedBox(height: 10),
+                  //date and time
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: datePicker(_dateController),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(
+                        child: timePicker(_timeController),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 20),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                    height: 50,
+                    width: MediaQuery.of(context).size.width,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        saveTodo();
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("Add"),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+
+    // reset controllers
+    _titleController.clear();
+    _dateController.clear();
+    _timeController.clear();
+    _selectedCategory = "Work";
+    _selectedPriority = "Medium";
   }
 
   Widget ChipData(String label) {
@@ -192,7 +352,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   const SizedBox(height: 10),
                   //task name
-                  TextInput("Task Name", _titleController),
+                  textInput("Task Name", _titleController),
 
                   //priority and category
                   Row(
@@ -274,11 +434,11 @@ class _HomePageState extends State<HomePage> {
 
                   //date
                   const SizedBox(height: 10),
-                  DatePircker(_dateController),
+                  datePicker(_dateController),
 
                   //time
                   const SizedBox(height: 10),
-                  TimePicker(_timeController),
+                  timePicker(_timeController),
 
                   //description
                   // const SizedBox(height: 30),
@@ -325,28 +485,28 @@ class _HomePageState extends State<HomePage> {
             ],
           ));
 
-  Widget TextInput(String text, TextEditingController controller) {
+  Widget textInput(String text, TextEditingController controller) {
     return Column(
       children: [
         TextFormField(
           controller: controller,
           decoration: InputDecoration(
             hintText: text,
-            hintStyle: TextStyle(color: Colors.black54),
+            hintStyle: const TextStyle(color: Colors.black54),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black),
+              borderSide: const BorderSide(color: Colors.black45),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black),
+              borderSide: const BorderSide(color: Colors.black45),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: primaryColor),
+              borderSide: const BorderSide(color: primaryColor),
             ),
           ),
-          style: TextStyle(color: Colors.black),
+          style: const TextStyle(color: Colors.black),
         ),
         const SizedBox(
           height: 20,
@@ -355,7 +515,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget DatePircker(TextEditingController controller) {
+  Widget datePicker(TextEditingController controller) {
     return (TextField(
       controller: controller,
       //editing controller of this TextField
@@ -387,7 +547,7 @@ class _HomePageState extends State<HomePage> {
     ));
   }
 
-  Widget TimePicker(TextEditingController controller) {
+  Widget timePicker(TextEditingController controller) {
     return (TextField(
         controller: controller,
         decoration: const InputDecoration(
